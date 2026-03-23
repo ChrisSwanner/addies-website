@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Swan Photo — Addie Swanner | Portland Oregon</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css" />
+
+    <!-- Behavior -->
+    <!-- EmailJS SDK v4 (UMD) - secure, supported bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.umd.min.js"></script>
+    <script>
+      (function(){
+        if (window.emailjs && typeof emailjs.init === 'function') {
+          emailjs.init('sUq0oJJL6WlGZI0j2');
+        }
+      })();
+    </script>
+    <script src="scripts/scripts.js" defer></script>
+  </head>
+
+  <body>
+    <div id="preloader" class="preloader" aria-hidden="true">
+      <div class="swan-loader" aria-label="Loading Swan Photo">
+        <img src="images/swan.jpg" alt="Swan preloader" />
+      </div>
+    </div>
+    <header class="site-header">
+      <div class="wrap header-row">
+        <div class="brand">
+          <h1 class="logo">Swan Photo</h1>
+          <p class="tag">Addie Swanner — 30 | Portland, OR | Travel with compensation</p>
+        </div>
+
+        <nav class="main-nav" aria-label="Primary">
+          <ul>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#about">About</a></li>
+            <li><button id="contactTrigger" class="contact-btn">Contact</button></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap hero-inner">
+          <div class="hero-text">
+            <p class="eyebrow">Cinematic • Clean • Timeless</p>
+            <h2>Addie Swanner — Portland-based</h2>
+            <p class="lead">Swan Photo has served clients with professional photography for 8 years, specializing in weddings, portraits, and grads. Available for travel with compensation.</p>
+            <a href="#gallery" class="btn">View Portfolio</a>
+          </div>
+          <div class="hero-image" style="background-image:url('images/1.jpg')" aria-hidden="true"></div>
+        </section>
+
+        <section id="gallery" class="wrap gallery-section" aria-labelledby="gallery-heading">
+        <header class="section-head">
+          <h2 id="gallery-heading">Gallery</h2>
+          <p class="lead">Explore collections — filter, hover for detail, click to expand.</p>
+
+          <div class="filters" role="tablist" aria-label="Gallery filters">
+            <button data-filter="all" class="filter active" aria-pressed="true">All</button>
+            <button data-filter="wedding" class="filter">Weddings</button>
+            <button data-filter="portrait" class="filter">Portraits</button>
+            <button data-filter="couples" class="filter">Couples</button>
+            <button data-filter="graduation" class="filter">Graduation</button>
+          </div>
+        </header>
+
+        <div class="grid" aria-live="polite">
+          <figure data-category="portrait" data-featured="true" class="reveal">
+            <img loading="lazy" src="images/2.jpg" alt="Portfolio image 1">
+            <figcaption>Editorial portrait – light and texture</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="wedding" data-featured="true" class="reveal">
+            <img loading="lazy" src="images/3.jpg" alt="Portfolio image 2">
+            <figcaption>Warm wedding moment</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="couples" data-featured="true" class="reveal">
+            <img loading="lazy" src="images/4.jpg" alt="Portfolio image 3">
+            <figcaption>Couple's candid joy</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="graduation" data-featured="true" class="reveal">
+            <img loading="lazy" src="images/5.jpg" alt="Portfolio image 4">
+            <figcaption>Milestone portrait</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="portrait" data-featured="true" class="reveal">
+            <img loading="lazy" src="images/6.jpg" alt="Portfolio image 5">
+            <figcaption>Moody portrait study</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="wedding" data-featured="true" class="reveal">
+            <img loading="lazy" src="images/7.jpg" alt="Portfolio image 6">
+            <figcaption>Intimate ceremony detail</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="couples" data-featured="true" class="reveal">
+            <img loading="lazy" src="images/8.jpg" alt="Portfolio image 7">
+            <figcaption>Sunset couples portrait</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="graduation" data-featured="true" class="reveal">
+            <img loading="lazy" src="images/9.jpg" alt="Portfolio image 8">
+            <figcaption>Celebratory grad moment</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="portrait" class="reveal">
+            <img loading="lazy" src="images/2.jpg" alt="Portfolio image 9">
+            <figcaption>Portrait study – candid expression</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="wedding" class="reveal">
+            <img loading="lazy" src="images/3.jpg" alt="Portfolio image 10">
+            <figcaption>Wedding reception glow</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="couples" class="reveal">
+            <img loading="lazy" src="images/4.jpg" alt="Portfolio image 11">
+            <figcaption>Intimate couples moment</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="graduation" class="reveal">
+            <img loading="lazy" src="images/5.jpg" alt="Portfolio image 12">
+            <figcaption>Grad portrait – proud and joyful</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="portrait" class="reveal">
+            <img loading="lazy" src="images/6.jpg" alt="Portfolio image 13">
+            <figcaption>Studio portrait – depth and emotion</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="wedding" class="reveal">
+            <img loading="lazy" src="images/7.jpg" alt="Portfolio image 14">
+            <figcaption>Ceremony vows moment</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+
+          <figure data-category="couples" class="reveal">
+            <img loading="lazy" src="images/8.jpg" alt="Portfolio image 15">
+            <figcaption>Couples engagement portrait</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+        </div>
+        </section>    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <button class="lb-close" aria-label="Close">×</button>
+        <button class="lb-prev" aria-label="Previous">‹</button>
+        <div class="lb-stage">
+          <img class="lb-image" alt="">
+          <p class="lb-caption"></p>
+        </div>
+        <button class="lb-next" aria-label="Next">›</button>
+      </div>
+
+      <section id="about" class="wrap about-section">
+        <h2>About</h2>
+        <p>Hey, I’m Addie Swanner — the creative behind Swan Photo. I’ve spent 8 years in Portland, Oregon, chasing light at dawn and the breath of a moment before it passes. I believe every person, pair, and celebration deserves imagery that feels like memory, not just a snapshot.</p>
+        <p>My toolkit is minimal, my eye is intentional, and my work is built around calm direction and real connection. Whether you’re planning a forest wedding, a cozy couples shoot, or an in-city graduation portrait, I travel with thoughtful packages, quick communication, and a focus on mood over gimmicks.</p>
+        <div class="about-highlights">
+          <strong>Favorites:</strong>
+          <ul>
+            <li>Golden hour portraits deep in forest light</li>
+            <li>Quiet ceremony details, natural emotion first</li>
+            <li>Urban grunge + soft romantic gradients</li>
+          </ul>
+        </div>
+        <a href="#contactModal" class="btn btn-cta">Book a consult</a>
+      </section>    <!-- Contact Modal -->
+      <div id="contactModal" class="contact-modal" aria-hidden="true" role="dialog" aria-label="Contact form">
+        <div class="contact-overlay"></div>
+        <div class="contact-modal-content">
+          <button class="contact-close" aria-label="Close contact form">×</button>
+          <section class="contact-section">
+            <h2>Get in Touch</h2>
+        <p class="lead">Tell me about your session or wedding — I’ll reply within 48 hours.</p>
+
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="form-row">
+            <label><span>Name</span><input name="name" type="text" required><small class="error" aria-live="polite"></small></label>
+            <label><span>Email</span><input name="email" type="email" required><small class="error" aria-live="polite"></small></label>
+          </div>
+
+          <label><span>Type of session</span>
+            <select name="type" required>
+              <option value="">Choose a type</option>
+              <option value="wedding">Wedding</option>
+              <option value="portrait">Portrait</option>
+              <option value="couples">Couples</option>
+              <option value="graduation">Graduation</option>
+              <option value="other">Other</option>
+            </select>
+            <small class="error" aria-live="polite"></small>
+          </label>
+
+          <label><span>Message</span><textarea name="message" rows="5" required></textarea><small class="error" aria-live="polite"></small></label>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Send message</button>
+            <div id="formStatus" role="status" aria-live="polite"></div>
+          </div>
+        </form>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-row">
+        <p>© <time datetime="2026">2026</time> Swan Photo by Addie Swanner</p>
+        <nav class="social">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Email">Email</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
+
+
+

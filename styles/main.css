@@ -1,0 +1,1099 @@
+/* ========== COTTAGE CORE DESIGN SYSTEM ========== */
+/* A romantic, warm aesthetic inspired by vintage gardens and 
+   countryside charm. Emphasizes soft earth tones, natural textures,
+   and an overall feeling of coziness and timeless elegance. */
+
+:root{
+  /* COTTAGE CORE PALETTE - DARKENED:
+     - Deeper charcoal/warm blacks for sophistication
+     - Rich sage greens (nature, growth, tranquility)
+     - Dusty rose/mauve (romantic, vintage)
+     - Warm earth tones (grounding)
+     - Deep dark browns (depth, elegance)
+  */
+  --bg:#1f1e1b;           /* deep charcoal-black base */
+  --card:#2a2825;         /* darker card background */
+  --ink:#faf8f5;          /* cream/off-white text for contrast */
+  --muted:#b8b3a8;        /* warm light taupe - secondary text */
+  --accent:#7fa896;       /* richer sage green - nature-inspired primary accent */
+  --accent-2:#d4a098;     /* warmer dusty rose/mauve - romantic secondary */
+  --accent-3:#e8dcc8;     /* soft cream-beige - accent tertiary */
+  
+  /* Layout & Spacing */
+  --max-width:1100px;
+  --radius:16px;          /* increased for softer, more cottage-like corners */
+  
+  /* Shadows: softer, more diffused for cottagecore feel */
+  --shadow:0 12px 40px rgba(61,53,48,0.08);
+  --shadow-lg:0 20px 60px rgba(61,53,48,0.12);
+  
+  --gap:1rem;
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+}
+
+*{box-sizing:border-box}
+
+/* Base page styling: dark moody ambiance with smooth background */
+html{
+  margin:0;
+  padding:0;
+}
+
+body{
+  margin:0;
+  min-height:100vh;  /* Ensure body extends full viewport */
+  background:linear-gradient(180deg, #1f1e1b 0%, #2a2825 35%, #1a2620 65%, #1f1e1b 100%);
+  background-attachment:fixed;  /* Keep gradient fixed, don't scroll with content */
+  background-size:100% 100%;  /* Ensure gradient covers full viewport without repeating */
+  background-repeat:no-repeat;  /* Explicitly prevent any tiling */
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  scroll-behavior:smooth;
+}
+
+/* Preloader overlay for first impression */
+.preloader {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#000;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  pointer-events:auto;
+  opacity:1;
+  transition:opacity 0.5s ease;
+}
+
+.preloader.hide {
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.swan-loader img {
+  width:160px;
+  height:auto;
+  border-radius:50%;
+  object-fit:cover;
+  animation:scalePulse 1.6s ease-in-out infinite;
+}
+
+@keyframes scalePulse {
+  0%, 100% { transform: scale(0.9); }
+  50% { transform: scale(1.08); }
+}
+
+
+#swan-body {
+  stroke-dasharray:450;
+  stroke-dashoffset:450;
+  animation:drawSwanBody 2s ease-in-out infinite alternate;
+}
+
+@keyframes popIn {
+  0%, 100% { transform: scale(0.8); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes drawSwan {
+  from { stroke-dashoffset:400; }
+  to { stroke-dashoffset:0; }
+}
+
+@keyframes drawSwanBody {
+  from { stroke-dashoffset:450; }
+  to { stroke-dashoffset:0; }
+}
+
+
+/* Container wrapper - max-width with centered, breathing padding */
+.wrap{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:1.75rem;
+  position:relative;
+  z-index:1;
+}
+
+/* Main content area */
+main {
+  position:relative;
+  z-index:1;
+}
+
+/* ========== HEADER & BRANDING ========== */
+/* Keeps navigation and branding clean, letting imagery shine
+   Header transitions smoothly as user scrolls */
+.site-header{
+  background:transparent;
+  padding:0.5rem 0;
+  transition:all 0.3s ease;
+  position:relative;
+  z-index:100;
+}
+
+.header-row{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+
+/* Logo in elegant serif - cottagecore signature */
+.brand .logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  margin:0;
+  color:var(--ink);
+  letter-spacing:0.05em;  /* romantic, slightly spaced */
+}
+
+.brand .tag{
+  margin:0;
+  color:var(--muted);
+  font-size:0.92rem;
+  font-weight:300;  /* lightweight for elegance */
+}
+
+/* ========== NAVIGATION ========== */
+/* Soft, understated nav with cottagecore color touches */
+.main-nav ul{
+  list-style:none;
+  display:flex;
+  gap:0.75rem;
+  margin:0;
+  padding:0;
+  align-items:center;
+}
+
+.main-nav a{
+  text-decoration:none;
+  color:var(--muted);
+  font-weight:500;  /* lighter weight for elegance */
+  padding:0.5rem 0.8rem;
+  border-radius:12px;
+  transition:all 0.3s ease;  /* smooth hover transitions */
+}
+
+.main-nav a:hover{
+  color:var(--accent);  /* sage green on hover */
+}
+
+/* Call-to-action button with romantic gradient */
+.main-nav a.cta{
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:#fff;
+  border:none;
+  font-weight:600;
+  box-shadow:0 6px 20px rgba(107,142,127,0.15);
+}
+
+/* ========== HERO SECTION ========== */
+/* Warm, inviting introduction with romantic gradient background
+   Parallax effect on scroll makes it feel dynamic and immersive */
+.hero{
+  margin:1rem 0 2rem;
+  border-radius:var(--radius);
+  overflow:hidden;
+  position:relative;
+}
+
+/* Decorative background elements in hero */
+.hero::before {
+  content:'';
+  position:absolute;
+  top:-50%;
+  right:-10%;
+  width:400px;
+  height:400px;
+  background:radial-gradient(circle, rgba(127,168,150,0.1) 0%, transparent 70%);
+  border-radius:50%;
+  animation:floatDecor 8s ease-in-out infinite;
+  z-index:0;
+  pointer-events:none;
+}
+
+.hero::after {
+  content:'';
+  position:absolute;
+  bottom:-30%;
+  left:-5%;
+  width:300px;
+  height:300px;
+  background:radial-gradient(circle, rgba(212,160,152,0.08) 0%, transparent 70%);
+  border-radius:50%;
+  animation:floatDecor 10s ease-in-out infinite reverse;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* Floating animation effect */
+@keyframes floatDecor {
+  0%, 100% {
+    transform:translateY(0px) translateX(0px);
+  }
+  33% {
+    transform:translateY(-20px) translateX(10px);
+  }
+  66% {
+    transform:translateY(10px) translateX(-15px);
+  }
+}
+
+.hero-inner{
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:1.5rem;
+  align-items:center;
+  padding:2.5rem;
+  /* Deep gradient background with scroll responsiveness */
+  background:linear-gradient(135deg, rgba(42,40,37,0.8) 0%, rgba(31,30,27,0.9) 100%);
+  box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.1);
+  border-radius:var(--radius);
+  transform:translateZ(0);  /* Enable GPU acceleration */
+  transition:transform 0.3s ease-out;
+  position:relative;
+  z-index:1;
+}
+
+/* Small label/eyebrow in sage green */
+.eyebrow{
+  color:var(--accent);
+  font-weight:700;
+  margin:0 0 0.8rem;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  font-size:0.85rem;
+  animation:slideInLeft 0.8s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity:0;
+    transform:translateX(-20px);
+  }
+  to {
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+/* Main hero heading in elegant serif */
+.hero h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.9rem;
+  margin:0;
+  color:var(--ink);
+  line-height:1.2;
+  animation:slideInLeft 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.1s both;
+}
+
+.lead{
+  color:var(--muted);
+  margin-top:1rem;
+  font-weight:300;
+  animation:slideInLeft 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
+}
+
+/* Hero image as circular portrait and optimized for head positioning */
+.hero-image{
+  background-size:cover;
+  background-position:top center; /* keep top of head visible without cut-off */
+  border-radius:50%;  /* circle crop for portrait aesthetic */
+  width:280px;
+  height:280px;
+  margin:0 auto; /* center in hero layout */
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  background-blend-mode:overlay;
+  transform:translateZ(0);
+  will-change:transform;
+}
+
+@media (min-width: 800px) {
+  .hero-image {
+    width:320px;
+    height:320px;
+    background-position:top center;
+  }
+}
+
+/* ========== BUTTONS ========== */
+/* Soft, elegant buttons with cottagecore charm */
+
+.btn{
+  display:inline-block;
+  padding:0.75rem 1.5rem;
+  border-radius:24px;  /* extra rounded for softness */
+  background:transparent;
+  border:1px solid rgba(61,53,48,0.12);
+  text-decoration:none;
+  color:var(--ink);
+  font-weight:500;
+  transition:all 0.3s ease;
+  cursor:pointer;
+}
+
+..btn:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  background: rgba(127,168,150,0.2);
+}
+
+.about-highlights {
+  margin-top: 1rem;
+  background: rgba(127,168,150,0.08);
+  border: 1px solid rgba(127,168,150,0.2);
+  border-radius: 14px;
+  padding: 0.9rem;
+  color: var(--ink);
+}
+
+.about-highlights ul {
+  margin: 0.5rem 0 0 1rem;
+  padding: 0;
+  list-style-type: disc;
+}
+
+.about-highlights li {
+  margin-bottom: 0.4rem;
+}
+
+/* Primary button with romantic gradient */
+.btn.primary{
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:#fff;
+  border:none;
+  box-shadow:0 10px 30px rgba(107,142,127,0.2);
+}
+
+.btn.primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 15px 40px rgba(107,142,127,0.25);
+}
+
+/* ========== GALLERY SECTION ========== */
+/* Main showcase of photography with romantic, interactive presentation */
+
+.gallery-section .section-head{
+  display:flex;
+  flex-direction:column;
+  gap:0.8rem;
+  margin-bottom:1.5rem;
+  animation:fadeInDown 0.8s ease-out;
+  position:relative;
+  z-index:20; /* keep filters above cards even during scroll transform */
+}
+
+.filters {
+  z-index:21;
+}
+
+.grid {
+  margin-top:2.3rem; /* more buffer between filters and images */
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity:0;
+    transform:translateY(-10px);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.section-head h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+  margin:0;
+  color:var(--ink);
+  position:relative;
+}
+
+/* Animated underline effect on headings */
+.section-head h2::after {
+  content:'';
+  position:absolute;
+  bottom:-8px;
+  left:0;
+  width:0;
+  height:2px;
+  background:linear-gradient(90deg, var(--accent), var(--accent-2));
+  animation:expandWidth 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes expandWidth {
+  from {
+    width:0;
+  }
+  to {
+    width:80px;
+  }
+}
+
+/* Filter buttons with subtle cottagecore hover states */
+.filters{
+  display:flex;
+  gap:0.5rem;
+  flex-wrap:wrap;
+}
+
+.filter{
+  background:transparent;
+  border:1.5px solid rgba(127,168,150,0.3);  /* sage green borders - more visible on dark */
+  padding:0.5rem 0.9rem;
+  border-radius:20px;
+  color:var(--muted);
+  font-weight:500;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  font-size:0.95rem;
+}
+
+.filter:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+/* Active filter state - soft celebration of selection */
+.filter.active{
+  background:linear-gradient(135deg, rgba(127,168,150,0.15), rgba(212,160,152,0.12));
+  border-color:var(--accent);
+  color:var(--accent);
+  box-shadow:0 6px 16px rgba(127,168,150,0.15);
+}
+
+/* ========== GALLERY GRID ========== */
+/* Responsive grid layout for beautiful image display */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:var(--gap);
+  margin-top:1.5rem;
+  position:relative;
+  z-index:1;
+}
+
+/* Individual gallery cards with hover interactions and parallax */
+figure{
+  background:var(--card);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,0.3);
+  cursor:zoom-in;
+  transition:all 0.4s ease;
+  transform-style:preserve-3d;
+  border:1px solid rgba(127,168,150,0.08);  /* subtle sage border */
+  position:relative;
+  z-index:1;
+}
+
+/* Subtle glow on hover - creates ethereal effect */
+figure::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at center, rgba(127,168,150,0.1) 0%, transparent 70%);
+  opacity:0;
+  transition:opacity 0.4s ease;
+  pointer-events:none;
+  z-index:2;
+}
+
+figure:hover::after {
+  opacity:1;
+}
+
+/* Images with romantic subtle filters */
+figure img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  aspect-ratio:4/3;
+  transition:transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
+  /* Soft filter for consistency - slight darkening */
+  filter:contrast(1.05) saturate(0.98) brightness(0.95);
+}
+
+/* Hover state: lift and subtle 3D tilt for engagement */
+figure:hover{
+  transform:translateY(-8px) rotateX(1deg) rotateY(1deg);
+  box-shadow:0 16px 48px rgba(127,168,150,0.2);
+}
+
+figure:hover img{
+  transform:scale(1.05);
+}
+
+/* Image caption styling - soft, secondary text */
+figcaption{
+  padding:1rem;
+  color:var(--muted);
+  font-size:0.95rem;
+  font-weight:500;
+  background:var(--card);
+  line-height:1.4;
+}
+
+/* ========== GALLERY OVERLAY (View Hint) ========== */
+/* Subtle overlay that appears on hover to indicate interactivity */
+.overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.28s ease;
+  /* Soft gradient backdrop */
+  background:linear-gradient(135deg, rgba(61,53,48,0.12), rgba(107,142,127,0.08));
+}
+
+figure{position:relative}
+
+figure:hover .overlay{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* "View" hint button in overlay */
+.overlay span{
+  background:rgba(252,251,249,0.95);
+  padding:0.6rem 1rem;
+  border-radius:24px;
+  color:var(--accent);
+  font-weight:700;
+  box-shadow:0 8px 24px rgba(61,53,48,0.1);
+  transition:all 0.3s ease;
+}
+
+/* ========== ENTRANCE ANIMATIONS ========== */
+/* Smooth fade-in and slide-up for gallery images as they appear
+   Enhanced with scale effect for more dynamic scroll experience */
+.reveal{
+  opacity:0;
+  transform:translateY(10px) scale(0.98);
+  transition:opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;  /* slight stagger */
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* Enhanced scroll reveal with staggered timing */
+.reveal:nth-child(2) {transition-delay:0.2s}
+.reveal:nth-child(3) {transition-delay:0.3s}
+.reveal:nth-child(4) {transition-delay:0.4s}
+.reveal:nth-child(5) {transition-delay:0.5s}
+
+/* ========== LIGHTBOX (Image Focus Modal) ========== */
+/* CORE FEATURE: Darkens entire page and focuses viewer on single image
+   Creates intimate, distraction-free experience for photo viewing */
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  /* Even darker for image focus on dark background */
+  background:rgba(0,0,0,0.85);
+  /* Strong blur effect removes background detail, draws eye to image */
+  backdrop-filter:blur(8px);
+  z-index:9999;
+  padding:1.5rem;
+}
+
+.lightbox[aria-hidden="false"]{display:flex}
+
+/* Inner stage container for the image */
+.lb-stage{
+  max-width:90%;
+  max-height:80vh;
+  text-align:center;
+  position:relative;
+  animation:fadeInScale 0.3s ease;  /* subtle entrance animation */
+}
+
+/* Smooth entrance animation for image */
+@keyframes fadeInScale {
+  from {
+    opacity:0;
+    transform:scale(0.95);
+  }
+  to {
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+/* Main lightbox image with romantic frame */
+.lb-image{
+  max-width:100%;
+  max-height:72vh;
+  border-radius:var(--radius);
+  box-shadow:0 40px 80px rgba(0,0,0,0.5);  /* deeper shadow on dark bg */
+  border:8px solid var(--card);  /* darker card border on dark image */
+}
+
+/* Caption styling in lightbox */
+.lb-caption{
+  color:#f2efe9;  /* light cream text on dark background */
+  margin-top:1rem;
+  font-weight:500;
+  font-size:0.95rem;
+}
+
+/* ========== LIGHTBOX CONTROLS ========== */
+/* Close, previous, next buttons with consistent styling */
+
+.lb-close, .lb-prev, .lb-next{
+  position:fixed;
+  border:0;
+  background:rgba(252,251,249,0.96);
+  color:var(--ink);
+  padding:0.6rem 0.8rem;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(36,30,28,0.15);
+  cursor:pointer;
+  transition:all 0.3s ease;
+  font-weight:600;
+  font-size:0.9rem;
+}
+
+.lb-close:hover, .lb-prev:hover, .lb-next:hover{
+  background:white;
+  box-shadow:0 12px 36px rgba(36,30,28,0.25);
+  transform:scale(1.05);
+}
+
+/* Close button in top-right */
+.lb-close{top:1.5rem;right:1.5rem}
+
+/* Previous button on left */
+.lb-prev{left:1.5rem;top:50%;transform:translateY(-50%)}
+
+/* Next button on right */
+.lb-next{right:1.5rem;top:50%;transform:translateY(-50%)}
+
+/* ========== CONTACT MODAL ========== */
+/* Modal overlay with blur effect - similar to lightbox but for form */
+
+.contact-modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9998;  /* Below lightbox, above page */
+  padding:1.5rem;
+}
+
+.contact-modal[aria-hidden="false"]{display:flex}
+
+/* Dark blurred background */
+.contact-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(8px);
+  z-index:-1;  /* Behind modal content */
+}
+
+/* Modal content container - centered, animated pop-in */
+.contact-modal-content{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:2.5rem;
+  max-width:600px;
+  width:100%;
+  box-shadow:0 40px 80px rgba(0,0,0,0.5);
+  position:relative;
+  z-index:1;
+  animation:modalSlideIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  border:1px solid rgba(127,168,150,0.1);
+}
+
+/* Smooth pop-up entrance animation */
+@keyframes modalSlideIn {
+  from {
+    opacity:0;
+    transform:scale(0.92) translateY(20px);
+  }
+  to {
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+/* Close button positioned in modal */
+.contact-close{
+  position:absolute;
+  top:1.5rem;
+  right:1.5rem;
+  background:transparent;
+  border:none;
+  font-size:1.6rem;
+  color:var(--muted);
+  cursor:pointer;
+  transition:all 0.3s ease;
+  width:2rem;
+  height:2rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+}
+
+.contact-close:hover{
+  color:var(--ink);
+  background:rgba(107,142,127,0.08);
+}
+
+/* Contact button in header - styled as CTA */
+.contact-btn{
+  background:inherit;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  padding:0.5rem 0.8rem;
+  border-radius:12px;
+  color:var(--muted);
+  transition:all 0.3s ease;
+  font-size:inherit;
+  font-family:inherit;
+}
+
+.contact-btn:hover{
+  color:var(--accent);
+}
+
+/* ========== CONTACT FORM (within modal) ========== */
+/* Warm, inviting form with dynamic interactive styling */
+
+.contact-section{
+  margin:0;
+}
+
+.contact-section h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  margin:0 0 0.5rem;
+  color:#ffffff; /* lighter header for contact form */
+}
+
+.contact-section .lead{
+  color:#f3efe9; /* lighter lead paragraph in contact modal for contrast */
+}
+
+/* Ensure headings are light even before modal becomes visible (prevent initial dark flash) */
+.contact-modal .contact-section h2,
+.contact-modal .contact-section .lead{
+  color: #ffffff !important;
+}
+
+.contact-form{
+  display:grid;
+  gap:1.5rem;
+  max-width:820px;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.2rem;
+}
+
+label{
+  display:block;
+  position:relative;
+}
+
+label>span{
+  display:block;
+  font-weight:700;
+  margin-bottom:0.6rem;
+  color:#ffffff; /* darker label text for better readability in form */
+  font-size:0.95rem;
+  letter-spacing:0.01em;
+  transition:all 0.3s ease;
+}
+
+/* Input fields with vibrant interactive states */
+input[type="text"], input[type="email"], select, textarea{
+  width:100%;
+  padding:0.9rem;
+  border-radius:12px;
+  border:2px solid rgba(255,255,255,0.06);
+  background:var(--card); /* darker background so white text is readable */
+  font-size:1rem;
+  color:#ffffff; /* make input/select/textarea text white */
+  transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  font-family:inherit;
+  position:relative;
+}
+
+/* Placeholder color for inputs */
+input::placeholder, textarea::placeholder, select::placeholder{
+  color: rgba(255,255,255,0.7);
+}
+
+/* FOCUS STATE: Scale up, border color change, glow effect */
+input[type="text"]:focus, 
+input[type="email"]:focus, 
+select:focus, 
+textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 6px rgba(127,168,150,0.12), 
+             0 8px 24px rgba(107,142,127,0.12);
+  transform:scale(1.02);
+  background:rgba(255,255,255,0.02); /* subtle lighten on focus while keeping dark bg */
+}
+
+/* Smooth hover state before focus */
+input[type="text"]:hover, 
+input[type="email"]:hover, 
+select:hover, 
+textarea:hover{
+  border-color:var(--accent-2);
+  box-shadow:0 4px 12px rgba(127,168,150,0.08);
+}
+
+/* Force white text color for inputs at all times and handle autofill/focus quirks */
+input[type="text"], input[type="email"], select, textarea{
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important; /* Safari/Chrome autofill */
+  caret-color: #ffffff; /* ensure caret is visible */
+}
+
+/* Autofill background and text override to match dark input background */
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+  -webkit-text-fill-color: #ffffff !important;
+  box-shadow: 0 0 0px 1000px var(--card) inset !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+input:-webkit-autofill:focus, textarea:-webkit-autofill:focus, select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Error message styling - vibrant and noticeable */
+small.error{
+  display:block;
+  color:#d97f84;
+  margin-top:0.5rem;
+  height:1.2em;
+  font-size:0.9rem;
+  font-weight:600;
+  animation:slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity:0;
+    transform:translateY(-8px);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* Form actions with prominent button */
+.form-actions{
+  display:flex;
+  align-items:center;
+  gap:1.25rem;
+  margin-top:1.5rem;
+  flex-wrap:wrap;
+}
+
+/* Enhanced primary button - "Send message" */
+.form-actions .btn.primary{
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:#fff;
+  border:none;
+  font-weight:700;
+  padding:0.85rem 1.8rem;
+  border-radius:28px;
+  box-shadow:0 12px 36px rgba(107,142,127,0.2);
+  transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  letter-spacing:0.02em;
+}
+
+/* Button hover: lift, shadow enhance, slight glow */
+.form-actions .btn.primary:hover{
+  transform:translateY(-4px) scale(1.05);
+  box-shadow:0 16px 48px rgba(107,142,127,0.28);
+}
+
+/* Button active/click state */
+.form-actions .btn.primary:active{
+  transform:translateY(-2px) scale(1.03);
+}
+
+/* Disabled state for sending */
+.form-actions .btn.primary:disabled{
+  opacity:0.75;
+  cursor:not-allowed;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow:0 12px 36px rgba(107,142,127,0.2);
+  }
+  50% {
+    box-shadow:0 12px 48px rgba(107,142,127,0.3);
+  }
+}
+
+/* Status message - celebration after send */
+#formStatus{
+  color:var(--accent);
+  font-weight:700;
+  font-size:0.95rem;
+  transition:all 0.4s ease;
+  animation:fadeInPop 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  letter-spacing:0.02em;
+}
+
+@keyframes fadeInPop {
+  from {
+    opacity:0;
+    transform:scale(0.8) translateY(8px);
+  }
+  to {
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+/* ========== ABOUT SECTION ========== */
+/* About section with decorative floating elements */
+.about-section {
+  position:relative;
+  padding:4rem 2rem;
+  margin:3rem auto;
+  max-width:920px;
+  background:rgba(47,46,44,0.78);
+  border:1px solid rgba(127,168,150,0.2);
+  box-shadow:0 18px 40px rgba(0,0,0,0.35);
+  border-radius:24px;
+  backdrop-filter: blur(8px);
+}
+
+.about-section::before {
+  content:'';
+  position:absolute;
+  top:-35px;
+  right:-40px;
+  width:320px;
+  height:320px;
+  background:radial-gradient(circle, rgba(212,160,152,0.14) 0%, transparent 68%);
+  border-radius:50%;
+  z-index:0;
+  pointer-events:none;
+  animation:floatDecor 10s ease-in-out infinite;
+}
+
+.about-section h2 {
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+  margin:0 0 1rem;
+  color:var(--ink);
+  position:relative;
+  z-index:1;
+  text-align:center;
+}
+
+.about-section p {
+  color:var(--muted);
+  line-height:1.7;
+  font-size:1rem;
+  max-width:600px;
+  position:relative;
+  z-index:1;
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.btn-cta {
+  display:block;
+  background:linear-gradient(135deg, #d4a098, #e8b8b0) !important;
+  color:#fff !important;
+  border:none !important;
+  font-weight:600;
+  margin-top:1.5rem;
+  margin-left:auto;
+  margin-right:auto;
+  width:fit-content;
+  box-shadow:0 8px 24px rgba(212,160,152,0.4);
+  animation:ctaPulse 2.8s ease-in-out infinite;
+}
+
+.btn-cta:hover {
+  transform: translateY(-3px) scale(1.04) !important;
+  box-shadow:0 12px 36px rgba(212,160,152,0.55) !important;
+}
+
+@keyframes ctaPulse {
+  0%, 100% {
+    box-shadow: 0 8px 24px rgba(212,160,152,0.4);
+  }
+  50% {
+    box-shadow: 0 8px 40px rgba(212,160,152,0.7);
+  }
+}
+
+/* ========== FOOTER ========== */
+/* Graceful closing section with subtle gradient */
+
+.site-footer{
+  border-top:1px solid rgba(127,168,150,0.1);
+  margin-top:3rem;
+  padding:1.5rem 0;
+  background:linear-gradient(180deg, transparent, rgba(127,168,150,0.03));
+}
+
+.footer-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+}
+
+.footer-row p{
+  color:var(--muted);
+  font-size:0.9rem;
+  margin:0;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+/* Cottage core on all screen sizes */
+
+@media (max-width:880px){
+  .hero-inner{
+    grid-template-columns:1fr;
+    gap:1.5rem;
+    padding:1.75rem;
+  }
+  
+  .form-row{grid-template-columns:1fr}
+  
+  /* Hide prev/next on touch devices, use swipe instead */
+  .lb-prev, .lb-next{display:none}
+}
