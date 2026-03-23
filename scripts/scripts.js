@@ -34,7 +34,7 @@
         setTimeout(() => {
           preloader.style.display = 'none';
         }, 600);
-      }, 4000); // Keep the animation visible for 4 seconds on load
+      }, 2000); // Keep the animation visible for 2 seconds on load
     }
   });
   
@@ -247,15 +247,49 @@
     if (!viewBtn || !gallery) return;
     viewBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const isHidden = gallery.classList.toggle('hidden');
-      gallery.setAttribute('aria-hidden', isHidden ? 'true' : 'false');
-      viewBtn.classList.toggle('active', !isHidden);
-      if (!isHidden) {
-        /* when revealing, re-attach handlers so figures are interactive */
+      const isHidden = gallery.classList.contains('hidden');
+
+      if (isHidden) {
+        /* Layout the gallery invisibly, then smoothly scroll to center it while
+           the swan preloader animation plays, so the gallery lands centered
+           as soon as the animation finishes. */
+        try {
+          gallery.classList.remove('hidden');
+          gallery.style.visibility = 'hidden';  /* keep invisible while laid out */
+          gallery.setAttribute('aria-hidden', 'true');
+          /* smooth scroll to center the gallery in viewport */
+          gallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch (err) {
+          console.warn('scrollIntoView failed', err);
+        }
+
+        /* show swan preloader for 1.5s, then reveal gallery */
+        if (preloader) {
+          preloader.style.display = 'flex';
+          /* ensure visible immediately */
+          setTimeout(() => preloader.classList.remove('hide'), 20);
+        }
+
         setTimeout(() => {
-          attachOpenHandlers();
-          attachTilt();
-        }, 120);
+          /* hide preloader with same transition used on load */
+          if (preloader) {
+            preloader.classList.add('hide');
+            setTimeout(() => { preloader.style.display = 'none'; }, 600);
+          }
+
+          /* reveal gallery visually now that preloader finished */
+          gallery.style.visibility = '';
+          gallery.setAttribute('aria-hidden', 'false');
+          viewBtn.classList.add('active');
+
+          /* when revealing, re-attach handlers so figures are interactive */
+          setTimeout(() => { attachOpenHandlers(); attachTilt(); }, 120);
+        }, 1500);
+      } else {
+        /* hide immediately when collapsing */
+        gallery.classList.add('hidden');
+        gallery.setAttribute('aria-hidden', 'true');
+        viewBtn.classList.remove('active');
       }
     });
   })();
