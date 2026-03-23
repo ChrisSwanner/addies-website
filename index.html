@@ -25,6 +25,12 @@
   </head>
 
   <body>
+    <!-- Animated background layers (cottage-core gradients) -->
+    <div class="bg-shift" aria-hidden="true">
+      <span class="bg-layer g1"></span>
+      <span class="bg-layer g2"></span>
+      <span class="bg-layer g3"></span>
+    </div>
     <div id="preloader" class="preloader" aria-hidden="true">
       <div class="swan-loader" aria-label="Loading Swan Photo">
         <img src="images/swan.jpg" alt="Swan preloader" />
@@ -69,100 +75,154 @@
             <button data-filter="wedding" class="filter">Weddings</button>
             <button data-filter="portrait" class="filter">Portraits</button>
             <button data-filter="couples" class="filter">Couples</button>
-            <button data-filter="graduation" class="filter">Graduation</button>
+            <button data-filter="Family Sessions" class="filter">Family Sessions</button>
           </div>
         </header>
 
         <div class="grid" aria-live="polite">
+          <!-- Portraits -->
           <figure data-category="portrait" data-featured="true" class="reveal">
-            <img loading="lazy" src="images/2.jpg" alt="Portfolio image 1">
+            <img loading="lazy" src="images/9.jpg" alt="Portfolio portrait 1">
+            <figcaption>Editorial portrait – light and texture</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="portrait" class="reveal">
+            <img loading="lazy" src="images/portrait1.jpg" alt="Portfolio portrait 2">
+            <figcaption>Editorial portrait – light and texture</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="portrait" class="reveal">
+            <img loading="lazy" src="images/portrait2.jpg" alt="Portfolio portrait 3">
+            <figcaption>Editorial portrait – light and texture</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="portrait" class="reveal">
+            <img loading="lazy" src="images/portrait3.jpg" alt="Portfolio portrait 4">
+            <figcaption>Editorial portrait – light and texture</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="portrait" class="reveal">
+            <img loading="lazy" src="images/portrait4.jpg" alt="Portfolio portrait 5">
             <figcaption>Editorial portrait – light and texture</figcaption>
             <div class="overlay" aria-hidden="true"><span>View</span></div>
           </figure>
 
+          <!-- Weddings -->
           <figure data-category="wedding" data-featured="true" class="reveal">
-            <img loading="lazy" src="images/3.jpg" alt="Portfolio image 2">
+            <img loading="lazy" src="images/2.jpg" alt="Wedding 1">
+            <figcaption>Warm wedding moment</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="wedding" class="reveal">
+            <img loading="lazy" src="images/3.jpg" alt="Wedding 2">
+            <figcaption>Warm wedding moment</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="wedding" class="reveal">
+            <img loading="lazy" src="images/5.jpg" alt="Wedding 3">
+            <figcaption>Warm wedding moment</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="wedding" class="reveal">
+            <img loading="lazy" src="images/wedding1.jpg" alt="Wedding 4">
+            <figcaption>Warm wedding moment</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="wedding" class="reveal">
+            <img loading="lazy" src="images/wedding2.jpg" alt="Wedding 5">
+            <figcaption>Warm wedding moment</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="wedding" class="reveal">
+            <img loading="lazy" src="images/wedding3.jpg" alt="Wedding 6">
+            <figcaption>Warm wedding moment</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="wedding" class="reveal">
+            <img loading="lazy" src="images/wedding4.jpg" alt="Wedding 7">
+            <figcaption>Warm wedding moment</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="wedding" class="reveal">
+            <img loading="lazy" src="images/wedding5.jpg" alt="Wedding 8">
+            <figcaption>Warm wedding moment</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="wedding" class="reveal">
+            <img loading="lazy" src="images/wedding6.jpg" alt="Wedding 9">
             <figcaption>Warm wedding moment</figcaption>
             <div class="overlay" aria-hidden="true"><span>View</span></div>
           </figure>
 
+          <!-- Couples -->
           <figure data-category="couples" data-featured="true" class="reveal">
-            <img loading="lazy" src="images/4.jpg" alt="Portfolio image 3">
+            <img loading="lazy" src="images/6.jpg" alt="Couples 1">
+            <figcaption>Couple's candid joy</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="couples" class="reveal">
+            <img loading="lazy" src="images/8.jpg" alt="Couples 2">
+            <figcaption>Couple's candid joy</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="couples" class="reveal">
+            <img loading="lazy" src="images/couple1.jpg" alt="Couples 3">
+            <figcaption>Couple's candid joy</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="couples" class="reveal">
+            <img loading="lazy" src="images/couple2.jpg" alt="Couples 4">
+            <figcaption>Couple's candid joy</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="couples" class="reveal">
+            <img loading="lazy" src="images/couple3.jpg" alt="Couples 5">
+            <figcaption>Couple's candid joy</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="couples" class="reveal">
+            <img loading="lazy" src="images/couple4.jpg" alt="Couples 6">
+            <figcaption>Couple's candid joy</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="couples" class="reveal">
+            <img loading="lazy" src="images/couple5.jpg" alt="Couples 7">
+            <figcaption>Couple's candid joy</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="couples" class="reveal">
+            <img loading="lazy" src="images/couple6.jpg" alt="Couples 8">
             <figcaption>Couple's candid joy</figcaption>
             <div class="overlay" aria-hidden="true"><span>View</span></div>
           </figure>
 
-          <figure data-category="graduation" data-featured="true" class="reveal">
-            <img loading="lazy" src="images/5.jpg" alt="Portfolio image 4">
+          <!-- Family Sessions -->
+          <figure data-category="Family Sessions" data-featured="true" class="reveal">
+            <img loading="lazy" src="images/session1.jpg" alt="Family session 1">
+            <figcaption>Milestone portrait</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="Family Sessions" class="reveal">
+            <img loading="lazy" src="images/session2.jpg" alt="Family session 2">
+            <figcaption>Milestone portrait</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="Family Sessions" class="reveal">
+            <img loading="lazy" src="images/session3.jpg" alt="Family session 3">
+            <figcaption>Milestone portrait</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="Family Sessions" class="reveal">
+            <img loading="lazy" src="images/7.jpg" alt="Family session 4">
+            <figcaption>Milestone portrait</figcaption>
+            <div class="overlay" aria-hidden="true"><span>View</span></div>
+          </figure>
+          <figure data-category="Family Sessions" class="reveal">
+            <img loading="lazy" src="images/4.jpg" alt="Family session 5">
             <figcaption>Milestone portrait</figcaption>
             <div class="overlay" aria-hidden="true"><span>View</span></div>
           </figure>
 
-          <figure data-category="portrait" data-featured="true" class="reveal">
-            <img loading="lazy" src="images/6.jpg" alt="Portfolio image 5">
-            <figcaption>Moody portrait study</figcaption>
-            <div class="overlay" aria-hidden="true"><span>View</span></div>
-          </figure>
-
-          <figure data-category="wedding" data-featured="true" class="reveal">
-            <img loading="lazy" src="images/7.jpg" alt="Portfolio image 6">
-            <figcaption>Intimate ceremony detail</figcaption>
-            <div class="overlay" aria-hidden="true"><span>View</span></div>
-          </figure>
-
-          <figure data-category="couples" data-featured="true" class="reveal">
-            <img loading="lazy" src="images/8.jpg" alt="Portfolio image 7">
-            <figcaption>Sunset couples portrait</figcaption>
-            <div class="overlay" aria-hidden="true"><span>View</span></div>
-          </figure>
-
-          <figure data-category="graduation" data-featured="true" class="reveal">
-            <img loading="lazy" src="images/9.jpg" alt="Portfolio image 8">
-            <figcaption>Celebratory grad moment</figcaption>
-            <div class="overlay" aria-hidden="true"><span>View</span></div>
-          </figure>
-
-          <figure data-category="portrait" class="reveal">
-            <img loading="lazy" src="images/2.jpg" alt="Portfolio image 9">
-            <figcaption>Portrait study – candid expression</figcaption>
-            <div class="overlay" aria-hidden="true"><span>View</span></div>
-          </figure>
-
-          <figure data-category="wedding" class="reveal">
-            <img loading="lazy" src="images/3.jpg" alt="Portfolio image 10">
-            <figcaption>Wedding reception glow</figcaption>
-            <div class="overlay" aria-hidden="true"><span>View</span></div>
-          </figure>
-
-          <figure data-category="couples" class="reveal">
-            <img loading="lazy" src="images/4.jpg" alt="Portfolio image 11">
-            <figcaption>Intimate couples moment</figcaption>
-            <div class="overlay" aria-hidden="true"><span>View</span></div>
-          </figure>
-
-          <figure data-category="graduation" class="reveal">
-            <img loading="lazy" src="images/5.jpg" alt="Portfolio image 12">
-            <figcaption>Grad portrait – proud and joyful</figcaption>
-            <div class="overlay" aria-hidden="true"><span>View</span></div>
-          </figure>
-
-          <figure data-category="portrait" class="reveal">
-            <img loading="lazy" src="images/6.jpg" alt="Portfolio image 13">
-            <figcaption>Studio portrait – depth and emotion</figcaption>
-            <div class="overlay" aria-hidden="true"><span>View</span></div>
-          </figure>
-
-          <figure data-category="wedding" class="reveal">
-            <img loading="lazy" src="images/7.jpg" alt="Portfolio image 14">
-            <figcaption>Ceremony vows moment</figcaption>
-            <div class="overlay" aria-hidden="true"><span>View</span></div>
-          </figure>
-
-          <figure data-category="couples" class="reveal">
-            <img loading="lazy" src="images/8.jpg" alt="Portfolio image 15">
-            <figcaption>Couples engagement portrait</figcaption>
-            <div class="overlay" aria-hidden="true"><span>View</span></div>
-          </figure>
         </div>
         </section>    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
         <button class="lb-close" aria-label="Close">×</button>

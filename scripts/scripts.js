@@ -53,7 +53,17 @@
   function updateParallax() {
     /* Hero image parallax: move slower than scroll for depth effect */
     if (heroImage) {
-      heroImage.style.transform = `translateY(${scrollY * 0.5}px)`;
+      // Disable parallax on narrow screens to avoid layout/jank on mobile
+      if (window.innerWidth < 800) {
+        heroImage.style.transform = '';
+      } else {
+        /* Cap the parallax offset so the image doesn't move too far and 'bug out'.
+           Use translate3d for better GPU compositing. */
+        const maxOffset = 80; // pixels max offset up or down
+        const offset = Math.max(-maxOffset, Math.min(maxOffset, Math.round(scrollY * 0.12)));
+        heroImage.style.willChange = 'transform';
+        heroImage.style.transform = `translate3d(0, ${offset}px, 0)`;
+      }
     }
     
     /* Hero inner container: slight scale and fade as you scroll past */
@@ -74,14 +84,23 @@
     });
     
     /* Header: add subtle shadow and background as user scrolls */
-    if (scrollY > 50) {
+    if (scrollY > 50 && scrollY <= 180) {
       header.style.boxShadow = `0 2px 12px rgba(0,0,0,0.2)`;
       header.style.background = 'rgba(31,30,27,0.95)';
       header.style.backdropFilter = 'blur(4px)';
+      header.classList.remove('vertical-nav');
+    } else if (scrollY > 180) {
+      /* Pin the nav vertically on the left for quick access */
+      header.classList.add('vertical-nav');
+      /* clear inline styles so CSS takes over */
+      header.style.boxShadow = '';
+      header.style.background = '';
+      header.style.backdropFilter = '';
     } else {
       header.style.boxShadow = 'none';
       header.style.background = 'transparent';
       header.style.backdropFilter = 'none';
+      header.classList.remove('vertical-nav');
     }
     
     ticking = false;
@@ -292,6 +311,18 @@
         viewBtn.classList.remove('active');
       }
     });
+    
+    /* Also make the nav's Gallery link behave like the hero View Portfolio button */
+    const navGalleryLink = q('.main-nav a[href="#gallery"]');
+    if (navGalleryLink) {
+      navGalleryLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        /* trigger the same action as the hero button */
+        viewBtn.click();
+        /* ensure focus for accessibility */
+        viewBtn.focus();
+      });
+    }
   })();
 
   /* Add a one-time pop-on-load animation to the hero View Portfolio button */
@@ -374,6 +405,13 @@
   /* Open modal when contact button or any "Book a consult" anchor is clicked */
   const contactTriggers = qa('#contactTrigger, a[href="#contactModal"]');
   contactTriggers.forEach(el => el.addEventListener('click', (e) => {
+    e.preventDefault();
+    openContactModal();
+  }));
+
+  /* Also open contact modal when any email/social link or mailto is clicked (e.g., footer Email) */
+  const emailLinks = qa('a[aria-label="Email"], a[href^="mailto:"]');
+  emailLinks.forEach(el => el.addEventListener('click', (e) => {
     e.preventDefault();
     openContactModal();
   }));

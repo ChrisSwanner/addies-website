@@ -40,15 +40,67 @@ html{
 }
 
 body{
-  margin:0;
+  margin:0 auto; /* center content horizontally */
   min-height:100vh;  /* Ensure body extends full viewport */
-  background:linear-gradient(180deg, #1f1e1b 0%, #2a2825 35%, #1a2620 65%, #1f1e1b 100%);
+  /* Static cottage-core gradient background (centered, cover) */
+  background:linear-gradient(135deg, rgba(127,168,150,0.96) 0%, rgba(232,212,196,0.92) 55%, rgba(212,160,152,0.95) 100%);
   background-attachment:fixed;  /* Keep gradient fixed, don't scroll with content */
-  background-size:100% 100%;  /* Ensure gradient covers full viewport without repeating */
-  background-repeat:no-repeat;  /* Explicitly prevent any tiling */
+  background-position:center;
+  background-size:cover;  /* cover the viewport */
+  background-repeat:no-repeat;
   color:var(--ink);
   -webkit-font-smoothing:antialiased;
   scroll-behavior:smooth;
+}
+
+/* Animated cottage-core background layers
+   Uses three stacked full-screen spans that crossfade to create smooth gradient shifts.
+*/
+.bg-shift{position:fixed;inset:0;z-index:-3;pointer-events:none}
+.bg-shift .bg-layer{position:fixed;inset:0;display:block;width:100%;height:100%;opacity:0;transition:opacity 1.2s ease-in-out;background-size:cover;background-repeat:no-repeat}
+
+/* Gradient variants (soft, cottage-core palettes) */
+/* Disable animated background layers — using static page background instead */
+.bg-shift{display:none !important}
+
+/* Fade animation: each layer fades in/out in a staggered loop */
+.keyframes-bgFade-placeholder{}
+@keyframes bgFade {
+  0% { opacity: 0 }
+  8% { opacity: 1 }
+  30% { opacity: 1 }
+  38% { opacity: 0 }
+  100% { opacity: 0 }
+}
+
+/* Even slower background cycle: 240s total, each layer visible ~80s */
+.bg-shift .g1{animation: bgFade 240s infinite linear 0s}
+.bg-shift .g2{animation: bgFade 240s infinite linear 80s}
+.bg-shift .g3{animation: bgFade 240s infinite linear 160s}
+
+/* Slight blur/overlay to better blend with site content */
+.bg-shift .bg-layer{filter:contrast(1.02) saturate(1.02) blur(0.6px)}
+
+/* Sync hero/about sections to cycle through darker cottage-core palettes
+   Matching the .bg-shift timing so the site palettes shift together. */
+@keyframes sectionShift {
+  0% {
+    background: linear-gradient(135deg, #606c38 0%, rgba(30,28,26,0.9) 55%);
+  }
+  33.333% {
+    background: linear-gradient(135deg,  #fefae0 0%, #dda15e 60%);
+  }
+  66.666% {
+    background: linear-gradient(135deg, #dda15e 0%, #bc6c25 60%);
+  }
+  100% {
+    background: linear-gradient(135deg, rgba(56,79,66,0.86) 0%, rgba(30,28,26,0.9) 55%);
+  }
+}
+
+/* Hero and about sections use a consistent background treatment */
+.hero-inner, .about-section {
+  background-size:cover;
 }
 
 /* Preloader overlay for first impression */
@@ -137,6 +189,53 @@ main {
   z-index:100;
 }
 
+/* Vertical nav state applied when user scrolls down */
+.site-header.vertical-nav{
+  position:fixed;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:72px;
+  padding:0.6rem;
+  border-radius:14px;
+  background:linear-gradient(180deg, rgba(12,11,10,0.88), rgba(28,26,24,0.86));
+  box-shadow:0 14px 48px rgba(0,0,0,0.6);
+  z-index:10010;
+  transition:all 320ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* Stack header contents vertically when nav is pinned */
+.site-header.vertical-nav .header-row{
+  flex-direction:column;
+  align-items:center;
+  gap:0.6rem;
+}
+
+/* Make nav links vertical and compact in the pinned state */
+.site-header.vertical-nav .main-nav ul{
+  flex-direction:column;
+  gap:0.35rem;
+}
+
+.site-header.vertical-nav .main-nav a{
+  padding:0.45rem 0.55rem;
+  font-size:0.92rem;
+  border-radius:10px;
+}
+
+/* Shrink logo slightly when pinned */
+.site-header.vertical-nav .brand .logo{
+  font-size:1.1rem;
+  letter-spacing:0.02em;
+}
+
+/* Responsive: disable vertical pinned nav on small screens */
+@media (max-width:880px){
+  .site-header.vertical-nav{ position:fixed; left:12px; top:auto; bottom:12px; transform:none; width:auto; border-radius:12px; display:flex; }
+  .site-header.vertical-nav .header-row{ flex-direction:row; }
+  .site-header.vertical-nav .main-nav ul{ flex-direction:row; }
+}
+
 .header-row{display:flex;align-items:center;justify-content:space-between;gap:1rem}
 
 /* Logo in elegant serif - cottagecore signature */
@@ -154,6 +253,9 @@ main {
   font-size:0.92rem;
   font-weight:300;  /* lightweight for elegance */
 }
+
+/* Hide full branding (logo + tagline) when the nav is pinned vertically */
+.site-header.vertical-nav .brand{ display:none !important; }
 
 /* ========== NAVIGATION ========== */
 /* Soft, understated nav with cottagecore color touches */
@@ -246,7 +348,7 @@ main {
   gap:1.5rem;
   align-items:center;
   padding:2.5rem;
-  /* Deep gradient background with scroll responsiveness */
+  /* Original deep gradient background for hero */
   background:linear-gradient(135deg, rgba(42,40,37,0.8) 0%, rgba(31,30,27,0.9) 100%);
   box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,0.1);
   border-radius:var(--radius);
@@ -553,6 +655,7 @@ figure{
   border:1px solid rgba(127,168,150,0.08);  /* subtle sage border */
   position:relative;
   z-index:1;
+  aspect-ratio: 4 / 3; /* enforce consistent card ratio so images don't stretch */
 }
 
 /* Subtle glow on hover - creates ethereal effect */
@@ -575,9 +678,8 @@ figure:hover::after {
 figure img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:cover; /* crop to fill without distortion */
   display:block;
-  aspect-ratio:4/3;
   transition:transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
   /* Soft filter for consistency - slight darkening */
   filter:contrast(1.05) saturate(0.98) brightness(0.95);
@@ -1158,6 +1260,16 @@ small.error{
   
   /* Hide prev/next on touch devices, use swipe instead */
   .lb-prev, .lb-next{display:none}
+}
+
+/* Mobile: prevent background from appearing zoomed-in by fitting gradient to viewport
+   and disabling fixed attachment which can cause scaling issues on some mobile browsers */
+@media (max-width:880px){
+  body{
+    background-attachment: scroll !important;
+    background-position: center top !important;
+    background-size: 100% 100% !important;
+  }
 }
 
 /* Utility: hide elements (used to toggle gallery visibility) */
