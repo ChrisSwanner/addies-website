@@ -182,9 +182,11 @@ main {
 /* Keeps navigation and branding clean, letting imagery shine
    Header transitions smoothly as user scrolls */
 .site-header{
-  background:transparent;
-  padding:0.5rem 0;
-  transition:all 0.3s ease;
+  background: rgba(12,11,10,0.72); /* slightly darker for contrast */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding:0.75rem 0; /* more breathing room */
+  transition:all 0.22s ease;
   position:relative;
   z-index:100;
 }
@@ -241,7 +243,7 @@ main {
 /* Logo in elegant serif - cottagecore signature */
 .brand .logo{
   font-family:'Playfair Display',serif;
-  font-size:1.5rem;
+  font-size:1.7rem; /* slightly larger for legibility */
   margin:0;
   color:var(--ink);
   letter-spacing:0.05em;  /* romantic, slightly spaced */
@@ -249,9 +251,9 @@ main {
 
 .brand .tag{
   margin:0;
-  color:var(--muted);
-  font-size:0.92rem;
-  font-weight:300;  /* lightweight for elegance */
+  color: rgba(250,248,245,0.95);
+  font-size:0.98rem;
+  font-weight:500;  /* stronger for legibility */
 }
 
 /* Hide full branding (logo + tagline) when the nav is pinned vertically */
@@ -270,16 +272,27 @@ main {
 
 .main-nav a{
   text-decoration:none;
-  color:var(--muted);
-  font-weight:500;  /* lighter weight for elegance */
-  padding:0.5rem 0.8rem;
-  border-radius:12px;
-  transition:all 0.3s ease;  /* smooth hover transitions */
+  color:var(--ink);
+  font-weight:700;
+  padding:0.6rem 1rem; /* increased hit area */
+  border-radius:14px;
+  transition:all 0.18s ease;  /* smooth hover transitions */
 }
 
 .main-nav a:hover{
   color:var(--accent);  /* sage green on hover */
+  background: rgba(255,255,255,0.04);
 }
+
+/* Make header links more readable on small screens */
+@media (max-width:880px){
+  .brand .logo{ font-size:1.4rem; }
+  .brand .tag{ display:block; font-size:0.88rem; }
+  .main-nav a{ padding:0.55rem 0.75rem; font-size:0.98rem; }
+}
+
+/* Improve general body text readability */
+body, p, li { font-size: 1rem; line-height: 1.65; color: #f6f3ef; }
 
 /* Call-to-action button with romantic gradient */
 .main-nav a.cta{
