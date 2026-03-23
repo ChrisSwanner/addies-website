@@ -236,6 +236,38 @@
   }
   attachOpenHandlers();
 
+  /* Toggle gallery visibility when hero 'View Portfolio' is clicked
+     - The gallery starts hidden (class "hidden" on the section)
+     - Clicking toggles visibility and updates aria-hidden for accessibility
+     - Re-attach handlers when the gallery becomes visible
+  */
+  (function(){
+    const viewBtn = q('.hero .btn[href="#gallery"]');
+    const gallery = q('#gallery');
+    if (!viewBtn || !gallery) return;
+    viewBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isHidden = gallery.classList.toggle('hidden');
+      gallery.setAttribute('aria-hidden', isHidden ? 'true' : 'false');
+      viewBtn.classList.toggle('active', !isHidden);
+      if (!isHidden) {
+        /* when revealing, re-attach handlers so figures are interactive */
+        setTimeout(() => {
+          attachOpenHandlers();
+          attachTilt();
+        }, 120);
+      }
+    });
+  })();
+
+  /* Add a one-time pop-on-load animation to the hero View Portfolio button */
+  window.addEventListener('load', () => {
+    const v = q('#viewPortfolioBtn');
+    if (!v) return;
+    /* small delay so the page feels settled before the pop */
+    setTimeout(() => v.classList.add('pop-on-load'), 260);
+  });
+
   /* ========== LIGHTBOX CONTROL HANDLERS ========== */
   btnClose?.addEventListener('click', closeLightbox);
   btnPrev?.addEventListener('click', prev);
@@ -389,20 +421,20 @@
 
     /* Validate name (required, non-empty) */
     if (!name.value.trim()) { 
-      setError(name, 'Please enter your name'); 
+      setError(name, 'Please tell me your name'); 
       ok = false; 
     } else setError(name, '');
     
     /* Validate email (required + valid format via regex) */
     const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email.value.trim() || !emailRx.test(email.value)) { 
-      setError(email, 'Enter a valid email'); 
+      setError(email, 'Please enter a valid email'); 
       ok = false; 
     } else setError(email, '');
     
     /* Validate session type (required dropdown) */
     if (!type.value) { 
-      setError(type, 'Please select a session type'); 
+      setError(type, 'Please choose a session type'); 
       ok = false; 
     } else setError(type, '');
     
@@ -422,10 +454,10 @@
     
     if (!validate()) return;  /* Exit early if validation fails */
     
-    /* Show loading state with engaging feedback */
+    /* Show loading state with friendly feedback */
     const btn = q('button[type="submit"]', form);
     btn.disabled = true;
-    btn.textContent = '✉️ Sending...';
+    btn.textContent = 'Sending your message…';
 
     /* Gather field elements and values */
     const nameEl = q('input[name="name"]', form);
@@ -483,15 +515,15 @@
                 if (span) span.style.color = 'var(--ink)';
               }
             });
-            status.textContent = '✓ Thanks! I\'ll be in touch within 48 hours.';
+            status.textContent = 'Thanks — I\'ll get back to you within 48 hours.';
             setTimeout(() => { closeContactModal(); setTimeout(() => { status.textContent = ''; }, 300); }, 2000);
           })
           .catch(err => {
             btn.disabled = false;
             btn.textContent = 'Send message';
             console.error('EmailJS SDK error full:', err);
-            const msg = err?.text || err?.message || err?.statusText || JSON.stringify(err) || 'Error sending message';
-            status.textContent = `⚠️ ${msg}`;
+            const msg = err?.text || err?.message || err?.statusText || JSON.stringify(err) || 'something went wrong';
+            status.textContent = `⚠️ Sorry — ${msg}`;
             setTimeout(() => { status.textContent = ''; }, 8000);
           });
       } else {
@@ -512,7 +544,7 @@
             console.error('EmailJS REST error response:', res.status, body);
             btn.disabled = false;
             btn.textContent = 'Send message';
-            status.textContent = `⚠️ ${res.status} ${body}`;
+            status.textContent = '⚠️ Sorry — ' + (body || 'Unable to send message') + ' (' + res.status + ')';
             setTimeout(() => { status.textContent = ''; }, 8000);
             return;
           }
@@ -533,7 +565,7 @@
           console.error('EmailJS REST fetch error:', err);
           btn.disabled = false;
           btn.textContent = 'Send message';
-          status.textContent = '⚠️ Network error sending message.';
+          status.textContent = '⚠️ Sorry — network error. Please try again.';
           setTimeout(() => { status.textContent = ''; }, 8000);
         });
       }
